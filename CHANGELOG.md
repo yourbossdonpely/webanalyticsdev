@@ -2,6 +2,12 @@
 
 All notable changes to Web Analytics Dev by Don PELY.
 
+## [0.1.2] - 2026-11-26
+
+### Added
+
+- Universal macOS build: one `.dmg` runs natively on Apple Silicon and Intel Macs.
+
 ## [0.1.1] - 2026-11-26
 
 ### Changed

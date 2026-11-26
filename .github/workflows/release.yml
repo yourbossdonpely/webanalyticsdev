@@ -14,8 +14,12 @@ jobs:
       matrix:
         include:
           - os: windows-latest
+            args: ''
           - os: macos-latest
+            # One universal binary: Apple Silicon + Intel Macs.
+            args: '--target universal-apple-darwin'
           - os: ubuntu-latest
+            args: ''
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write
@@ -37,6 +41,10 @@ jobs:
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Install Rust targets for macOS universal build
+        if: matrix.os == 'macos-latest'
+        run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
+
       - name: Install frontend dependencies
         run: npm ci
 
@@ -46,13 +54,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: ${{ github.ref_name }}
+          args: ${{ matrix.args }}
           releaseName: 'Web Analytics Dev ${{ github.ref_name }}'
           releaseBody: |
             Standalone desktop app by Don PELY — cookieless web analytics plus
             website uptime monitoring with desktop alerts.
 
             - Windows: `*-setup.exe` installer and `*.msi`
-            - macOS: `*.dmg`
+            - macOS: universal `*.dmg` (Apple Silicon + Intel)
             - Linux: `*.deb`, `*.rpm`, `*.AppImage`
             - Source: `webanalyticsdev-${{ github.ref_name }}.zip` (attached below)
 

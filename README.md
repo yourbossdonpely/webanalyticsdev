@@ -27,7 +27,7 @@ Get the latest standalone installer from the
 | OS | Files |
 |---|---|
 | Windows | `Web-Analytics-Dev_*_x64-setup.exe` (installer), `*.msi` |
-| macOS | `Web-Analytics-Dev_*.dmg` |
+| macOS | `Web-Analytics-Dev_*.dmg` (universal: Apple Silicon + Intel) |
 | Linux | `*.deb` (Debian/Ubuntu), `*.rpm` (Fedora/RHEL), `*.AppImage` |
 | Source | `webanalyticsdev-<version>.zip` + `Source code (zip)` |
 
