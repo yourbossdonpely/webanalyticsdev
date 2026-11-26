@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/icon-1024.png" width="128" height="128" alt="Web Analytics Dev logo" />
+<img src="Analytics%20Pulse%20Icon.png" width="128" height="128" alt="Web Analytics Dev logo" />
 
 # Web Analytics Dev
 
@@ -113,17 +113,16 @@ npx tauri dev        # run with hot reload
 | `cargo test --manifest-path src-tauri/Cargo.toml` | Rust unit tests (store, analytics) |
 | `npm run build` | Type-check + production frontend build |
 | `npx tauri build` | Full release bundles for your OS (exe/msi, dmg, deb/rpm) |
-| `npm run icons` | Re-render the logo PNG and all platform icons |
+| `npm run icons` | Regenerate all platform icons from `Analytics Pulse Icon.png` |
 
 ### Layout
 
 ```
+Analytics Pulse Icon.png   official app icon (source for all platform icons)
 tracker/t.js            the cookieless tracker (embedded into the app binary)
 src/                    React + TypeScript dashboard (Vite)
 src-tauri/              Rust backend: store, analytics, collector, monitor, tray
-  icons/                generated platform icons (ico, icns, png sets)
-assets/                 logo.svg + rendered icon-1024.png
-scripts/                icon renderer (pure Node, zero native deps)
+  icons/                platform icons generated from the official icon (ico, icns, png sets)
 .github/workflows/      ci.yml (test+build) and release.yml (tagged multi-OS bundles)
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "webanalyticsdev",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Web Analytics Dev by Don PELY — lightweight, cookieless web analytics plus website uptime monitoring with desktop alerts.",
   "author": "Don PELY",
   "license": "MIT",
@@ -15,8 +15,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "icons:png": "node scripts/make-icon-png.mjs",
-    "icons": "npm run icons:png && tauri icon assets/icon-1024.png --output src-tauri/icons"
+    "icons": "tauri icon \"Analytics Pulse Icon.png\" --output src-tauri/icons"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",

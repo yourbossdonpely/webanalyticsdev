@@ -1,6 +1,6 @@
 [package]
 name = "webanalyticsdev"
-version = "0.1.0"
+version = "0.1.1"
 description = "Web Analytics Dev by Don PELY — cookieless web analytics plus website uptime monitoring with desktop alerts."
 edition = "2021"
 authors = ["Don PELY"]

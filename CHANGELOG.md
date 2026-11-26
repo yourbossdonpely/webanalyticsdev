@@ -2,6 +2,13 @@
 
 All notable changes to Web Analytics Dev by Don PELY.
 
+## [0.1.1] - 2026-11-26
+
+### Changed
+
+- Official "Analytics Pulse" app icon by Don PELY now used for all desktop
+  installers (Windows, macOS, Linux), the README and the tray icon.
+
 ## [0.1.0] - 2026-11-26
 
 First public release.
