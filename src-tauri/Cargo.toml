@@ -1,0 +1,23 @@
+[package]
+name = "webanalyticsdev"
+version = "0.1.0"
+description = "Web Analytics Dev by Don PELY — cookieless web analytics plus website uptime monitoring with desktop alerts."
+edition = "2021"
+authors = ["Don PELY"]
+license = "MIT"
+rust-version = "1.77"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-notification = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "rustls-tls-webpki-roots"] }
+tiny_http = "0.12"
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]

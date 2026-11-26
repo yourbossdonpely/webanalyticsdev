@@ -1,0 +1,36 @@
+{
+  "name": "webanalyticsdev",
+  "version": "0.1.0",
+  "description": "Web Analytics Dev by Don PELY — lightweight, cookieless web analytics plus website uptime monitoring with desktop alerts.",
+  "author": "Don PELY",
+  "license": "MIT",
+  "homepage": "https://github.com/yourbossdonpely/webanalyticsdev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourbossdonpely/webanalyticsdev.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "icons:png": "node scripts/make-icon-png.mjs",
+    "icons": "npm run icons:png && tauri icon assets/icon-1024.png --output src-tauri/icons"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-notification": "^2",
+    "react": "^19",
+    "react-dom": "^19",
+    "webanalyticsdev": "file:"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4",
+    "typescript": "^5",
+    "vite": "^6"
+  }
+}

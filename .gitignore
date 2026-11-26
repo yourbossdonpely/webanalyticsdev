@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+dist/
+
+# rust
+src-tauri/target/
+src-tauri/gen/
+
+# tauri bundles
+src-tauri/*.sig
+*.AppImage
+*.deb
+*.rpm
+*.dmg
+*.msi
+*.exe
+
+# logs / os
+*.log
+.DS_Store
+Thumbs.db
+
+# local data (real user data never committed)
+*.jsonl

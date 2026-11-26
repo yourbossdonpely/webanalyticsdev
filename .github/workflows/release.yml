@@ -1,0 +1,79 @@
+name: Release
+
+# Builds standalone installers for Windows, macOS and Linux and publishes
+# them to a GitHub Release. Triggered by pushing a version tag, e.g. `v0.1.0`.
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+          - os: macos-latest
+          - os: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linux system dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev patchelf
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build + publish bundles
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: 'Web Analytics Dev ${{ github.ref_name }}'
+          releaseBody: |
+            Standalone desktop app by Don PELY — cookieless web analytics plus
+            website uptime monitoring with desktop alerts.
+
+            - Windows: `*-setup.exe` installer and `*.msi`
+            - macOS: `*.dmg`
+            - Linux: `*.deb`, `*.rpm`, `*.AppImage`
+            - Source: `webanalyticsdev-${{ github.ref_name }}.zip` (attached below)
+
+            See CHANGELOG.md for what's new.
+          releaseDraft: false
+          prerelease: false
+
+  source-zip:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Attach source-code zip to the release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NAME="webanalyticsdev-${{ github.ref_name }}.zip"
+          git archive --format=zip --prefix="webanalyticsdev-${{ github.ref_name }}/" -o "$NAME" HEAD
+          gh release upload "${{ github.ref_name }}" "$NAME" --clobber
